@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<h1 class="mt-4 ml-3 text-center">Inscription</h1>
+<hr class="my-4 w-50">
+<div class="container border border-dark p-4">
+   {{ form_start(form) }}
+      {{  form_widget(form)  }}
+   {{ form_end(form) }}
+</div>
+
+{% endblock %}
