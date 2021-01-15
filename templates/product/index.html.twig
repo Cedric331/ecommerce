@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Produits{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+
+  <section class="dark-grey-text text-center">
+    <h1 class="font-weight-bold mb-4 pb-2">Nos produits</h1>
+    
+    <h3 class="grey-text w-responsive mx-auto mb-5">
+      Retrouver l'ensemble de nos produits
+    </h3>
+    <hr class="my-4">
+    <div class="row">
+
+{% for product in products %}
+
+      <div class="col-lg-3 col-sm-12 col-md-6 mb-4 d-flex align-items-stretch">
+        <div class="card align-items-center" style="min-width:250px;">
+          <div class="view overlay">
+            <img style="height:150px;" src="{{ asset('uploads/products/' ~ product.illustration) }}" class="card-img-top"
+              alt="Image du produit {{ product.name }}">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body text-center">
+            <a href="" class="grey-text">
+              <h6>{{ product.name }}</h6>
+            </a>
+            <hr>
+
+            <h5 class="blue-text mb-0">
+              <strong>Prix : {{ (product.price / 100) | number_format(2, ',', '.')}} €</strong>
+            </h5>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

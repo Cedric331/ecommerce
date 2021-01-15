@@ -12,47 +12,45 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class RegisterType extends AbstractType
+class UpdatePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('email', EmailType::class, [
+               'disabled' => true,
+               'label' => "Mon adresse email"
+            ])
             ->add('firstname', TextType::class, [
-               'required' => true,
-               'label' => 'Votre prénom :',
-               'attr' => ['placeholder' => 'Prénom']
+               'disabled' => true,
+               'label' => "Mon prénom"
             ])
             ->add('lastname', TextType::class, [
-               'required' => true,
-               'label' => 'Votre nom :',
-               'attr' => ['placeholder' => 'Nom']
+               'disabled' => true,
+               'label' => "Mon nom"
             ])
-            ->add('email', EmailType::class, [
-               'required' => true,
-               'label' => 'Votre adresse email :',
-               'attr' => ['placeholder' => 'Email']
+            ->add('old_password', PasswordType::class,[
+               'label' => "Mon mot de passe",
+               'mapped' => false,
+               'attr' => [
+                  'placeholder' => "Veuillez saisir votre mot de passe actuel"
+               ]
             ])
-            ->add('password', RepeatedType::class, [
+            ->add('new_password', RepeatedType::class, [
                'type' => PasswordType::class,
+               'mapped' => false,
                'invalid_message' => "Les mots de passe doivent être identiques",
                'required' => true,
                'first_options' => 
-               ['label' => 'Votre mot de passe :',
+               ['label' => 'Nouveau votre mot de passe :',
                   'attr' => 
-                     ['placeholder' => 'Mot de passe']
+                     ['placeholder' => 'Nouveau Mot de passe']
                ],
                'second_options' => 
-               ['label' => 'Votre mot de passe :',
+               ['label' => 'Confirmer votre nouveau mot de passe :',
                   'attr' => 
-                        ['placeholder' => 'Confirmer le mot de passe']
+                        ['placeholder' => 'Confirmer le nouveau mot de passe']
                ],
-            ])
-
-            ->add('submit', SubmitType::class, [
-               'label' => "S'inscrire", 
-               'attr' => [
-                  'class' => 'btn-outline-primary btn-lg mt-3'
-               ]
             ])
         ;
     }
