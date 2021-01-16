@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+      {% if update %}
+         Modification d'une adresse
+      {% else %}
+         Création d'une adresse
+      {% endif %}
+{% endblock %}
+
+{% block body %}
+
+      <div class="container my-5 border border-dark shadow p-3 mb-5 bg-white rounded">
+      {% if update %}
+         <h1 class="text-center">Modification d'une adresse</h1>
+      {% else %}
+         <h1 class="text-center">Création d'une adresse</h1>
+      {% endif %}
+
+            <a href="{{ path('account') }}">Revenir sur mon compte</a>
+      <hr class="my-4 w-50">
+
+         {{ form_start(form) }}
+         <div class="row">
+            <div class="col-md-6">
+               {{ form_row(form.name) }}
+            </div>
+            <div class="col-md-6">
+               {{ form_row(form.compagny) }}
+            </div>
+            <div class="col-md-6">
+               {{ form_row(form.firstname) }}
+            </div>
+            <div class="col-md-6">
+               {{ form_row(form.lastname) }}
+            </div>
+            <div class="col-md-12">
+               {{ form_row(form.adress) }}
+            </div>
+            <div class="col-md-6">
+               {{ form_row(form.city) }}
+            </div>
+            <div class="col-md-6">
+               {{ form_row(form.postal) }}
+            </div>
+            <div class="col-md-6">
+               {{ form_row(form.country) }}
+            </div>
+            <div class="col-md-6">
+               {{ form_row(form.phone) }}
+            </div>
+         </div>
+      <div>
+      {% if update %}
+               <button class="btn btn-block my-3 btn-outline-primary btn-lg mr-2" type="submit">Modifier mon adresse</button>
+      {% else %}
+         <button class="btn btn-block my-3 btn-outline-primary btn-lg mr-2" type="submit">Ajouter mon adresse</button>
+      {% endif %}
+            <a href="{{ path('account')}}" class="btn btn-outline-danger btn-lg">Annuler</a>
+      </div>
+         {{ form_end(form) }}
+
+   </div>
+   <hr class="mb-5">
+{% endblock %}

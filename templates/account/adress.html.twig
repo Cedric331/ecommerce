@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses{% endblock %}
+
+{% block body %}
+
+   <div class="my-5 container">
+   {% for message in app.flashes('success') %}
+      <div class="alert alert-success ">
+          {{ message }}
+      </div>
+   {% endfor %}
+      <a href="{{ path('adress_add') }}" class="btn btn-info float-right">Créer une nouvelle adresse</a>
+      <h1>Mes adresses</h1>
+      <a href="{{ path('account') }}">Revenir sur mon compte</a>
+      <hr>
+      {% if app.user.adresses | length == 0 %}
+         <h3 class="text-center">Vous n'avez pas encore d'adresse, pour en créer une 
+         <a href="{{ path('adress_add') }}" >cliquer ici.</a></h3>
+      {% else %}
+      <div class="row row-cols-1 row-cols-md-2">
+
+         {% for adress in adresses %}
+         <div class="col mb-4 shadow p-3 mb-5 bg-dark rounded">
+           <div class="card">
+             <div class="view overlay">
+             </div>
+             <div class="card-body">
+               <div class="row">
+                  <h4 class="card-title col-md-12">Nom de l'adresse :{{ adress.name }}</h4>
+                  <p class="card-text col-md-12">Adresse : {{ adress.adress }}</p>
+                  <p class="card-text col-md-6">Ville : {{ adress.city }}</p>
+                  <p class="card-text col-md-6">Code postal : {{ adress.postal }}</p>
+                  <p class="card-text col-md-6">Pays : {{ adress.country }}</p>
+                  <p class="card-text col-md-6">Numéro : {{ adress.phone }}</p>
+               </div>
+               <a href="{{ path('adress_update', {'id': adress.id})}}" class="btn btn-primary btn-md">Modifier</a>
+               <a href="{{ path('adress_delete', {'id': adress.id})}}" class="btn btn-danger btn-md">Supprimer</a>
+             </div>
+           </div>
+         </div>
+         {% endfor %}
+
+      </div>
+      {% endif %}
+
+   </div>
+
+{% endblock %}
