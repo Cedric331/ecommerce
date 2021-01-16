@@ -18,14 +18,17 @@
 
 {% include('menu.html.twig') %}
 
-<main role="main">
+<div id="main">
 
+<div class="content">
  {% block body %}{% endblock %}
-
+</div>
     <!-- FOOTER -->
-    <footer class="container-fluid footer-custom bg-dark">
-        <p class="float-right"><a href="#">Back to top</a></p>
+    <footer class="container-fluid footer-custom fixed-bottom bg-dark">
+    <div class="mt-3">
+        <p class="float-right "><a href="#">Back to top</a></p>
         <p class="text-white">&copy; 2020-2021 Boutique Star Wars - <a href="#">Conditions générales de vente</a></p>
+   </div>
     </footer>
 </main>
 <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
