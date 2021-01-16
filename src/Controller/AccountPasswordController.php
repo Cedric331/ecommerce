@@ -39,7 +39,6 @@ class AccountPasswordController extends AbstractController
             if($encoder->isPasswordValid($user, $old_password))
             {
                $new_password = $form->get("new_password")->getData();
-
                $user->setPassword($encoder->encodePassword($user, $new_password));
 
                $this->entity->flush();

@@ -3,8 +3,8 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<div class="container border-dark border my-5 p-3">
-   <form method="post">
+<div class="container border-dark border mt-5 p-3">
+   <form method="post" class="m-auto">
        {% if error %}
            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
        {% endif %}
