@@ -69,8 +69,8 @@
 
             <div class="row mt-3">
               <div class="col-md-12 text-center text-md-left text-md-right">
-                <button class="btn btn-primary btn-lg btn-rounded text-center">
-                  <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i>Ajouter au panier</button>
+                <a href="{{ path('cart_add', {'id': product.id }) }}" class="btn btn-primary btn-lg btn-rounded text-center">
+                  <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i>Ajouter au panier</a>
               </div>
             </div>
           </div>

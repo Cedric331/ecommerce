@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+   <div class="mb-5">
+      <div class="container z-depth-1 p-5 my-5 border border-dark shadow-lg p-3 bg-white rounded">
+         {% if cartComplete != null %}
+            {% set total = 0 %}
+
+         <a href="{{ path('cart_remove_all') }}" class="btn btn-sm btn-danger float-right mb-4">Vider mon panier</a>
+         <h1>Mon Panier</h1>
+         <section>
+            <div class="table-responsive">
+               <table class="table product-table table-cart-v-1">
+                  <thead>
+                     <tr>
+                        <th class="col-auto font-weight-bold">
+                        </th>
+                        <th class="col-auto font-weight-bold">
+                           <strong>Produit</strong>
+                        </th>
+                        <th class="col-auto font-weight-bold">
+                           <strong>Quantité</strong>
+                        </th>
+                        <th class="col-auto font-weight-bold">
+                           <strong>Prix</strong>
+                        </th>
+                        <th class="col-auto font-weight-bold">
+                           <strong>Total</strong>
+                        </th>
+                        <th>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% for products in cartComplete %}
+                     <tr>
+                        <td scope="row">
+                           <img src="{{ asset('uploads/products/' ~ products.product.illustration) }}" alt=""
+                              class="img-fluid z-depth-0 img-fluid" style="max-width: 200px;max-height: 150px;">
+                        </td>
+
+                        <td>
+                           <h5>
+                              <strong>{{ products.product.name }}</strong>
+                           </h5>
+                        </td>
+
+                        <td>
+                           <a href="{{ path('cart_remove', {'id': products.product.id}) }}" class="btn btn-sm btn-danger"
+                              data-toggle="tooltip" data-placement="top" title="Supprimer le produit">-
+                           </a>
+                           <span class="mx-1">{{ products.quantity }}</span>
+                           <a href="{{ path('cart_add', {'id': products.product.id}) }}" class="btn btn-sm btn-primary"
+                              data-toggle="tooltip" data-placement="top" title="Supprimer le produit">+
+                           </a>
+                        </td>
+
+                        <td class="font-weight-bold">
+                           <strong>{{ (products.product.price / 100) | number_format(2, ',', '.')}} €</strong>
+                        </td>
+
+                        <td class="font-weight-bold">
+                           <strong>{{ ((products.product.price * products.quantity) / 100) | number_format(2, ',', '.')}}
+                              €</strong>
+                        </td>
+
+                        <td>
+                           <a href="{{ path('cart_delete', {'id': products.product.id}) }}"
+                              data-toggle="tooltip" data-placement="top" title="Supprimer le produit">
+                              <img src="{{ asset('image/delete.png')}}" alt="supprimer le produit" style="max-height:20px;">
+                           </a>
+                        </td>
+                     </tr>
+                        {% set total = total + (products.product.price * products.quantity ) %}
+                     {% endfor %}
+                     <tr>
+                        <td>
+                           <h4 class="mt-2">
+                              <strong>Total de votre panier : {{ ( total / 100) | number_format(2, ',', '.')}}€</strong>
+                           </h4>
+                        </td>
+
+                        <td colspan="3">
+                           <button type="button" class="mt-2 btn btn-success btn-rounded px-4">Commander
+                           </button>
+                        </td>
+
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </section>
+
+         {% else %}
+         <h1>Mon Panier</h1>
+            <h2 class="mt-2">
+               Votre panier est vide se rendre sur <a href="{{ path('products')}}">la boutique</a>
+            </h2>
+         {% endif %}
+
+      </div>
+   </div>
+{% endblock %}
