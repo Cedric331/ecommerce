@@ -47,6 +47,17 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 100,
+     *      minMessage = "Le mot de passe doit contenir au moins 8 caractères",
+     *      maxMessage = "Le mot de passe ne peut pas contenir plus de 100 caractères"
+     * )
+     * @Assert\NotBlank
+     */
+    private $new_password;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
@@ -126,6 +137,21 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+        /**
+     * @see UserInterface
+     */
+    public function getNewPassword(): string
+    {
+        return (string) $this->new_password;
+    }
+
+    public function setNewPassword(string $new_password): self
+    {
+        $this->new_password = $new_password;
 
         return $this;
     }

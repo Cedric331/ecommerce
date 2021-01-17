@@ -7,24 +7,24 @@
 <div class="container-fluid">
    <div class="row mt-5">
 
-      <div class="col-md-3 col-5">
+      <div class="col-md-3 col-12">
          <h3>Filtres</h3>
             <hr>
-         <div class="col">
+         <div class="col-md-10 col-sm-6">
             {{ form(form) }}
          </div>
       </div>
 
-      <div class="col-md-9 col-7">
+      <div class="col-md-9 col-12">
          <h3 class="text-center">Nos Produits</h3>
          <hr class="col-6 my-3">
-                  {% if products == null %}
+            {% if products == null %}
                <h3 class="text-center">Aucun résultat pour cette recherche</h3>
-         {% endif %}
-         <div class="row">
+            {% endif %}
+         <div class="row d-flex justify-content-center m-auto">
 
             {% for product in products %}
-            <div class="card align-items-center border-dark border shadow p-3 mb-5 bg-white rounded my-2 mx-2 col-3"
+            <div class="card align-items-center border-dark border shadow p-3 mb-5 bg-white rounded my-2 mr-sm-5 col-3 align-self-center"
                style="min-width:250px;">
                <div class="view overlay">
                   <img style="height:150px;" src="{{ asset('uploads/products/' ~ product.illustration) }}"

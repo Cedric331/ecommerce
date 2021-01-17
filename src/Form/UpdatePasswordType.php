@@ -26,7 +26,6 @@ class UpdatePasswordType extends AbstractType
             ])
             ->add('new_password', RepeatedType::class, [
                'type' => PasswordType::class,
-               'mapped' => false,
                'invalid_message' => "Les mots de passe doivent être identiques",
                'required' => true,
                'first_options' => 

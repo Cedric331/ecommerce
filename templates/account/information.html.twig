@@ -4,23 +4,24 @@
 
 {% block body %}
 
-<div class="container my-5 border border-dark shadow p-3 mb-5 bg-white rounded">
-<h1>Modification des informations</h1>
-<hr>
-   {% if notification != null %}
-      <div class="alert alert-success">
-         {{ notification }}
-      </div>
-   {% endif %}
+   <div class="container my-5 border border-dark shadow p-3 mb-5 bg-white rounded">
+   <h1>Modification des informations</h1>
+         <a href="{{ path('account') }}">Revenir sur mon compte</a>
+   <hr>
+      {% if notification != null %}
+         <div class="alert alert-success">
+            {{ notification }}
+         </div>
+      {% endif %}
 
-   {{ form_start(form) }}
-   {{ form_widget(form) }}
-<div>
-   <button class="btn btn-outline-primary btn-lg mr-2" type="submit">Mettre à jour</button>
-      <a href="{{ path('account')}}" class="btn btn-outline-danger btn-lg">Annuler</a>
-</div>
-   {{ form_end(form) }}
+      {{ form_start(form) }}
+      {{ form_widget(form) }}
+         <div>
+            <button class="btn btn-outline-primary btn-lg mr-2" type="submit">Mettre à jour</button>
+               <a href="{{ path('account')}}" class="btn btn-outline-danger btn-lg">Annuler</a>
+         </div>
+      {{ form_end(form) }}
 
-</div>
+   </div>
 
 {% endblock %}
