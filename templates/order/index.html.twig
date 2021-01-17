@@ -21,7 +21,7 @@
             <div class="tab-content p-4">
                <a href="{{ path('adress_add', {'shop': true})}}" class="mb-3 btn btn-primary btn-block">Créer une nouvelle adresse</a>
               <!--/.Panel 1-->
-               {{ form_start(form) }}
+               {{ form_start(form, {action:path('order_recap')}) }}
                   {{ form_widget(form) |replace({'[br]' : '<br/>'})|raw  }}
                {{ form_end(form) }}
             </div>
@@ -112,7 +112,7 @@
                 <hr>
                 <dl class="row">
                   <dt class="col-sm-8">
-                    Total
+                    Total de mon panier
                   </dt>
                   <dt class="col-sm-4">
                     {{ ( total / 100) | number_format(2, ',', '.')}} €
