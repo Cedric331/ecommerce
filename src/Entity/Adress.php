@@ -192,4 +192,9 @@ class Adress
 
         return $this;
     }
+
+    public function __toString()
+    {
+       return $this->getName(). '[br]'. $this->getAdress(). '[br]' . $this->getCity(). ' - ' . $this->getCountry();
+    }
 }

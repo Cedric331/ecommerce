@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <section class="dark-grey-text">
+
+  	<div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-7">
+
+            <ul class="nav md-pills nav-justified pills-primary font-weight-bold">
+              <li class="nav-item">
+                  <h2>Ma commande</h2>
+              </li>
+            </ul>
+         <hr class="w-50">
+
+            <div class="tab-content p-4">
+               <a href="{{ path('adress_add', {'shop': true})}}" class="mb-3 btn btn-primary btn-block">Créer une nouvelle adresse</a>
+              <!--/.Panel 1-->
+               {{ form_start(form) }}
+                  {{ form_widget(form) |replace({'[br]' : '<br/>'})|raw  }}
+               {{ form_end(form) }}
+            </div>
+          </div>
+
+                        {# <div>
+                <div class="d-block my-3">
+                  <div class="mb-2">
+                    <input name="group2" type="radio" class="form-check-input with-gap" id="radioWithGap4" checked
+                      required>
+                    <label class="form-check-label" for="radioWithGap4">Credit card</label>
+                  </div>
+                  <div class="mb-2">
+                    <input iname="group2" type="radio" class="form-check-input with-gap" id="radioWithGap5"
+                      required>
+                    <label class="form-check-label" for="radioWithGap5">Debit card</label>
+                  </div>
+                  <div class="mb-2">
+                    <input name="group2" type="radio" class="form-check-input with-gap" id="radioWithGap6" required>
+                    <label class="form-check-label" for="radioWithGap6">Paypal</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="cc-name123">Name on card</label>
+                    <input type="text" class="form-control" id="cc-name123" placeholder="" required>
+                    <small class="text-muted">Full name as displayed on card</small>
+                    <div class="invalid-feedback">
+                      Name on card is required
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="cc-number123">Credit card number</label>
+                    <input type="text" class="form-control" id="cc-number123" placeholder="" required>
+                    <div class="invalid-feedback">
+                      Credit card number is required
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 mb-3">
+                    <label for="cc-expiration123">Expiration</label>
+                    <input type="text" class="form-control" id="cc-expiration123" placeholder="" required>
+                    <div class="invalid-feedback">
+                      Expiration date required
+                    </div>
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <label for="cc-cvv123">CVV</label>
+                    <input type="text" class="form-control" id="cc-cvv123" placeholder="" required>
+                    <div class="invalid-feedback">
+                      Security code required
+                    </div>
+                  </div>
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Place order</button>
+              </div> #}
+
+          <!--Panier-->
+          <div class="col-lg-5 mb-4">
+            <div class="card z-depth-0 border border-light rounded-0">
+              <div class="card-body">
+                <h4 class="mb-4 mt-1 h5 text-center font-weight-bold">Mes produits</h4>
+                <a class="btn btn-info btn-block" href="{{ path('cart') }}">Modifier mon panier</a>
+                <hr>
+                {% if cartComplete %}
+                  {% set total = 0 %}
+                <dl class="row">
+                {% for products in cartComplete %}
+                     <dd class="col-sm-12 text-center">
+                     <img src="{{ asset('uploads/products/' ~ products.product.illustration) }}" alt=""
+                              class="img-fluid z-depth-0 img-fluid" style="max-width: 200px;max-height: 150px;">
+                     </dd>
+                     <dd class="col-sm-12 text-center">
+                       <a href="{{ path('products_show', {'slug': products.product.slug}) }}">
+                       {{ products.product.name }}
+                       </a>
+                     </dd>
+                     <dd class="col-sm-12 text-center">
+                       Quantité : {{ products.quantity }} - 
+                       Prix : {{ ((products.product.price * products.quantity) / 100) | number_format(2, ',', '.')}} €
+                     </dd>
+
+                     {% set total = total + (products.product.price * products.quantity ) %}
+                  {% endfor %}
+                </dl>
+                <hr>
+                <dl class="row">
+                  <dt class="col-sm-8">
+                    Total
+                  </dt>
+                  <dt class="col-sm-4">
+                    {{ ( total / 100) | number_format(2, ',', '.')}} €
+                  </dt>
+                </dl>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+         {# Fin Panier #}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

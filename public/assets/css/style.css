@@ -24,3 +24,13 @@ header{
   height: 50px;
   margin-top: 50px;
 }
+
+.form-check{
+   margin-top:7px;
+   padding: 20px 60px;
+   background-color: rgb(224, 235, 235);
+}
+
+.col-form-label{
+   font-weight: bold;
+}

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Adress;
 use App\Form\AdressType;
-use App\Repository\AdressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,9 +33,9 @@ class AdressController extends AbstractController
     }
 
    /**
-     * @Route("/compte/adresse/creation", name="adress_add")
+     * @Route("/compte/adresse/creation/{shop}", name="adress_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, $shop = null): Response
     {
       $adress = new Adress();
       $form = $this->createForm(AdressType::class, $adress);
@@ -47,8 +46,10 @@ class AdressController extends AbstractController
          $this->entity->persist($adress);
          $this->entity->flush();
 
+         if($shop == true){
+            return $this->redirectToRoute('order');
+         }
          $this->addFlash('success','Adresse ajoutée');
-
          return $this->redirectToRoute('adress');
       }
 

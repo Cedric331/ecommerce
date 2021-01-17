@@ -18,17 +18,17 @@
          <h3 class="text-center">Vous n'avez pas encore d'adresse, pour en créer une 
          <a href="{{ path('adress_add') }}" >cliquer ici.</a></h3>
       {% else %}
-      <div class="row row-cols-1 row-cols-md-2">
+      <div class="row p-3 justify-content-center">
 
          {% for adress in adresses %}
-         <div class="col mb-4 shadow p-3 mb-5 bg-dark rounded">
+         <div class="col-sm-11 col-md-5 mx-2 mb-4 shadow p-3 mb-5 bg-dark rounded">
            <div class="card">
              <div class="view overlay">
              </div>
              <div class="card-body">
                <div class="row">
-                  <h4 class="card-title col-md-12">Nom de l'adresse :{{ adress.name }}</h4>
-                  <p class="card-text col-md-12">Adresse : {{ adress.adress }}</p>
+                  <h4 class="card-title col-md-11">Nom de l'adresse : {{ adress.name }}</h4>
+                  <p class="card-text col-md-11">Adresse : {{ adress.adress }}</p>
                   <p class="card-text col-md-6">Ville : {{ adress.city }}</p>
                   <p class="card-text col-md-6">Code postal : {{ adress.postal }}</p>
                   <p class="card-text col-md-6">Pays : {{ adress.country }}</p>
