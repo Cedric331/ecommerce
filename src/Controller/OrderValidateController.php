@@ -23,7 +23,7 @@ class OrderValidateController extends AbstractController
     {
       
        $order = $this->entity->getRepository(Order::class)->findOneBy(['stripeSessionId' => $stripeSessionId]);
-dd($order);
+
        if(!$order || $order->getUser() != $this->getUser()){
           return $this->redirectToRoute('home');
        }

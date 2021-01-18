@@ -22,7 +22,7 @@ class StripeController extends AbstractController
       $YOUR_DOMAIN = 'http://127.0.0.1:8000';
 
       $order = $entity->getRepository(Order::class)->findOneBy(['reference' => $reference]);
-
+      
       if(!$order)
       {
         return new jsonResponse(['error' => 'order']);
