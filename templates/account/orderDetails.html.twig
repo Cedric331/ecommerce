@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma commande{% endblock %}
+
+{% block body %}
+   <div class="container my-5 py-3 rounded">
+      <h1>Ma commande</h1>
+      <a href="{{ path('account') }}" class="mb-3">Revenir sur mon compte</a>
+      <hr>
+         <div class="col mb-4">
+            <div class="card z-depth-0 border border-light rounded-0 m-auto">
+              <div class="card-body">
+                <h4 class="mb-4 mt-1 h5 text-center font-weight-bold">Commande - {{ order.reference }}</h4>
+                <p class="text-center">Passé le : {{ order.createdAt|date('d/m/Y') }}</p>
+                <hr>
+                  {% set total = 0 %}
+                <dl class="row">
+                {% for products in order.orderDetails %}
+                     <dd class="col-sm-12 text-center">
+                       {{ products.product }}
+                     </dd>
+                     <dd class="col-sm-12 text-center">
+                      <p>Quantité : {{ products.quantity }}</p>
+                      <p>Prix : {{ ((products.price * products.quantity) / 100) | number_format(2, ',', '.')}} €</p>
+                      <p>Transporteur : {{ order.carrierName }}</p>
+                     </dd>
+
+                     {% set total = total + (products.price * products.quantity ) %}
+                  {% endfor %}
+                </dl>
+                <hr>
+                <dl class="row">
+                  <dt class="col-sm-8">
+                    Sous-total :
+                  </dt>
+                  <dt class="col-sm-4">
+                    {{ ( total / 100) | number_format(2, ',', '.')}} €
+                  </dt>
+                </dl>
+               <dl class="row">
+                  <dt class="col-sm-8">
+                   Livraison :
+                  </dt>
+                  <dt class="col-sm-4">
+                    {{ ( order.carrierPrice / 100) | number_format(2, ',', '.')}} €
+                  </dt>
+                </dl>
+               <dl class="row">
+                  <dt class="col-sm-8">
+                   Total :
+                  </dt>
+                  <dt class="col-sm-4">
+                    {{ ( (order.carrierPrice + total) / 100) | number_format(2, ',', '.')}} €
+                  </dt>
+                </dl>
+              </div>
+            </div>
+          </div>
+         {# Fin Panier #}
+
+   </div>
+
+{% endblock %}
