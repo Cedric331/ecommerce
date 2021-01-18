@@ -3,13 +3,10 @@
 namespace App\Controller;
 
 use Stripe\Stripe;
-use App\Classe\Cart;
 use App\Entity\Order;
 use App\Entity\Product;
-use App\Entity\OrderDetails;
 use Stripe\Checkout\Session;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +16,7 @@ class StripeController extends AbstractController
     /**
      * @Route("/commande/create-checkout-session/{reference}", name="stripe_create")
      */
-    public function index(EntityManagerInterface $entity, Cart $cart, $reference)
+    public function index(EntityManagerInterface $entity, $reference)
     {
       $productStripe = [];
       $YOUR_DOMAIN = 'http://127.0.0.1:8000';
@@ -59,16 +56,23 @@ class StripeController extends AbstractController
 
       Stripe::setApiKey('sk_test_51IAusCI6YwgpDkGgRmZowmNTpDQPHZRfJFOWrXJU4o3F7tTmeemAL21Ss81Z7PuPmuTchvw0Z8BVDemuYYLlNBOh00WFmn8iGO');
 
-      $checkout_session = Session::create([
-      'customer_email' => $this->getUser()->getEmail(),
-        'payment_method_types' => ['card'],
-        'line_items' => [$productStripe],
-        'mode' => 'payment',
-        'success_url' => $YOUR_DOMAIN . '/commande/merci/{CHECKOUT_SESSION_ID}',
-        'cancel_url' => $YOUR_DOMAIN . '/commande/erreur/{CHECKOUT_SESSION_ID}',
-      ]);
 
-      $response = new JsonResponse(['id' => $checkout_session->id]);
-      return $response;
+      $checkout_session = Session::create([
+         'customer_email' => $this->getUser()->getEmail(),
+         'payment_method_types' => ['card'],
+         'line_items' => [
+             $productStripe
+         ],
+         'mode' => 'payment',
+         'success_url' => $YOUR_DOMAIN . '/commande/merci/{CHECKOUT_SESSION_ID}',
+         'cancel_url' => $YOUR_DOMAIN . '/commande/erreur/{CHECKOUT_SESSION_ID}',
+     ]);
+
+     $order->setStripeSessionId($checkout_session->id);
+     $entity->flush();
+
+     $response = new JsonResponse(['id' => $checkout_session->id]);
+     return $response;
+
     }
 }

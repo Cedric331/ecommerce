@@ -97,7 +97,7 @@
          {# Fin Panier #}
          <div class="col-lg-12">
             <hr class="w-50">
-         <button id="checkout-button" class="btn btn-success btn-block">Payer | {{ ( (carrier.carrierPrice + total) / 100) | number_format(2, ',', '.')}} €</button>
+         <a id="checkout-button" class="btn btn-success btn-block">Payer | {{ ( (carrier.carrierPrice + total) / 100) | number_format(2, ',', '.')}} €</a>
          </div>
 
         </div>
@@ -111,31 +111,34 @@
 
     // Create an instance of the Stripe object with your publishable API key
     var stripe = Stripe("pk_test_51IAusCI6YwgpDkGgezCDiDwZdI4IcazpPq8DrKtcL3qj4NhvX0sE0iKxKgSbTrwYt5nVwl6PWUgVUcezhgIOwCWn00ITt60Dqn");
-    var checkoutButton = document.getElementById("checkout-button");
-    checkoutButton.addEventListener("click", function () {
-
-      fetch("/commande/create-checkout-session/{{ reference }}", {
-        method: "POST",
-      }).then(function (response) {
-          return response.json();
-        }).then(function (session) {
-           if(session.error == 'order'){
-              window.location.replace('{{ path('order') }}');
-           } else {
-               return stripe.redirectToCheckout({ sessionId: session.id });
-           }
-        }).then(function (result) {
-
-          // If redirectToCheckout fails due to a browser or network
-          // error, you should display the localized error message to your
-          // customer using error.message.
-          if (result.error) {
-            alert(result.error.message);
-          }
-        }).catch(function (error) {
-          console.error("Error:", error);
+       var checkoutButton = document.getElementById("checkout-button");
+        checkoutButton.addEventListener("click", function () {
+                fetch("/commande/create-checkout-session/{{ reference }}", {
+                    method: "POST",
+                })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (session) {
+                    if (session.error == 'order') {
+                        window.location.replace('{{ path('order') }}');
+                    } else {
+                        return stripe.redirectToCheckout({ sessionId: session.id });
+                    }
+                })
+                .then(function (result) {
+                    // If redirectToCheckout fails due to a browser or network
+                    // error, you should display the localized error message to your
+                    // customer using error.message.
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.error("Error:", error);
+                });
         });
-    });
   </script>
   {% endblock %}
 {% endblock %}
+

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement Valide{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <section class="dark-grey-text">
+
+  	<div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-7">
+            <ul class="nav md-pills nav-justified pills-primary font-weight-bold">
+              <li>
+                  <h2>Confirmation de commande</h2>
+              </li>
+            </ul>
+         <hr class="w-50">
+            <div class="container my-5 py-5 z-depth-1">
+              <section class="text-center px-md-5 mx-md-5 dark-grey-text">
+                <h4 class="font-weight-bold">Merci pour votre commande numéro {{order.reference}}</h4>
+                <a class="btn btn-success btn-md mt-3 waves-effect" href="#" role="button">Revenir sur mes commandes<i class="fa fa-download ml-1"></i></a>
+              </section>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
