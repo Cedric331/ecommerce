@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Classe\Cart;
 use App\Entity\Order;
-use App\Entity\OrderDetails;
 use App\Form\OrderType;
+use App\Entity\OrderDetails;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +53,7 @@ class OrderController extends AbstractController
        $form->handleRequest($request);
        if($form->isSubmitted() && $form->isValid())
        {
-          
+          $date = new \DateTime();
           $delivery = $form->get('adresses')->getData();
           $delivery_content = $delivery->getFirstname().' '. $delivery->getLastname();
           $delivery_content .= '<br>'. $delivery->getPhone();
@@ -65,9 +65,11 @@ class OrderController extends AbstractController
           $delivery_content .= '<br>'. $delivery->getPostal();
           $delivery_content .= '<br>'. $delivery->getCountry();
 
+         $reference = $date->format('dmY').'-'.uniqid();
          $order = new Order();
          $order->setUser($this->getUser())
-                ->setCreatedAt(new \DateTime())
+                ->setCreatedAt($date)
+                ->setReference($reference)
                 ->setCarrierName($form->get('transporteurs')->getData()->getName())
                 ->setCarrierPrice($form->get('transporteurs')->getData()->getPrice())
                 ->setDelivery($delivery_content)
@@ -84,12 +86,15 @@ class OrderController extends AbstractController
                         ->setTotal($product['product']->getPrice() * $product['quantity']);
             $this->entity->persist($orderDetail);
          }
+         
          $this->entity->flush();
+
 
          return $this->render('order/add.html.twig',[
             'cartComplete' => $cart->getFull(),
             'carrier' => $order,
-            'delivery' => $delivery
+            'delivery' => $delivery,
+            'reference' => $order->getReference()
         ]);
        }
        return $this->redirectToRoute('cart');

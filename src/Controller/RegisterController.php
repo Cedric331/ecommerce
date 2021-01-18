@@ -16,7 +16,7 @@ class RegisterController extends AbstractController
 
    private $entity;
 
-   public function __construct( EntityManagerInterface $entity){
+   public function __construct(EntityManagerInterface $entity){
       $this->entity = $entity;
    }
 
