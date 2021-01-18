@@ -25,7 +25,8 @@ class OrderCrudController extends AbstractCrudController
          // the labels used to refer to this entity in titles, buttons, etc.
          ->setPaginatorPageSize(15)
          ->setEntityLabelInSingular('Commande')
-         ->setEntityLabelInPlural('Commandes');
+         ->setEntityLabelInPlural('Commandes')
+         ->setDefaultSort(['id' => 'DESC']);
     }
 
     public function configureActions(Actions $actions): Actions
@@ -41,6 +42,7 @@ class OrderCrudController extends AbstractCrudController
             DateTimeField::new('createdAt', 'Date de la commande'),
             // TextField::new('user.FullName', 'Utilisateur'),
             TextField::new('carrierName', 'Nom du transporteur'),
+            MoneyField::new('carrierPrice', 'Prix du transporteur')->setCurrency('EUR'),
             MoneyField::new('total', 'Total de la commande')->setCurrency('EUR'),
             TextField::new('delivery', 'Adresse de livraison'),
             BooleanField::new('isPaid', 'Commande Payé'),

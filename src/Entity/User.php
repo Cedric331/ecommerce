@@ -84,7 +84,6 @@ class User implements UserInterface
         $this->adresses = new ArrayCollection();
         $this->orders = new ArrayCollection();
     }
-    
 
     public function getId(): ?int
     {

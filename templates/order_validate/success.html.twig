@@ -9,21 +9,23 @@
   	<div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-lg-7">
-            <ul class="nav md-pills nav-justified pills-primary font-weight-bold">
+          <div class="col-lg-12 text-center">
+            <ul class="text-center md-pills nav-justified pills-primary font-weight-bold" style="list-style: none;">
               <li>
-                  <h2>Confirmation de commande</h2>
+                  <h2>Merci pour votre commande</h2>
               </li>
             </ul>
          <hr class="w-50">
             <div class="container my-5 py-5 z-depth-1">
               <section class="text-center px-md-5 mx-md-5 dark-grey-text">
-                <h4 class="font-weight-bold">Merci pour votre commande numéro {{order.reference}}</h4>
-                <a class="btn btn-success btn-md mt-3 waves-effect" href="#" role="button">Revenir sur mes commandes<i class="fa fa-download ml-1"></i></a>
+                <h4>Merci pour votre commande numéro <strong>{{order.reference}}</strong></h4>
+                <h5>Une confirmation vient de vous être envoyée par email à l'adresse <strong>{{ order.user.email }}</strong>
+               <p class="my-2">Pour suivre votre commande, rendez-vous sur <a class="waves-effect" href="{{ path('account')}}" role="button">mes commandes</a></p>
               </section>
             </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 </div>

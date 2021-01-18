@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement Valide{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <section class="dark-grey-text">
+
+  	<div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <ul class="text-center md-pills nav-justified pills-primary font-weight-bold" style="list-style: none;">
+              <li>
+                  <h2>Il semblerait que votre paiement est échoué</h2>
+              </li>
+            </ul>
+         <hr class="w-50">
+            <div class="container my-5 py-5 z-depth-1">
+              <section class="text-center px-md-5 mx-md-5 dark-grey-text">
+                <h4>Nous n'avons pas pu valider votre commande <strong>{{order.reference}}</strong></h4>
+               <p class="my-2">Vous pouvez réssayer le paiement en <a href="{{ path('order')}}">cliquant ici</a></p>
+              </section>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

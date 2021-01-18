@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+
+   <div class="container my-5 py-3 z-depth-1 rounded">
+   <h1>Mes commandes</h1>
+   {% if app.user.orders|length == 0 %}
+   <hr>
+      <div class="container my-5 px-0 z-depth-1">
+        <section class="text-center white-text justify-content-between p-5 indigo lighten-2">
+          <h3 class="font-weight-bold mb-md-0 mb-4 mt-2">Aucune commande</h3>
+          <a href="{{ path('products') }}" class="mt-4 btn btn-primary btn-rounded">Se rendre sur la boutique</a>
+        </section>
+      </div>
+   {% else %}
+     <section class="dark-grey-text">
+       <div class="table-responsive">
+         <table class="table product-table mb-0">
+           <thead class="mdb-color lighten-5">
+             <tr>
+               <th></th>
+               <th class="font-weight-bold">
+                 <strong>Produit</strong>
+               </th>
+               <th class="font-weight-bold">
+                 <strong>Color</strong>
+               </th>
+               <th></th>
+               <th class="font-weight-bold">
+                 <strong>Prix</strong>
+               </th>
+               <th class="font-weight-bold">
+                 <strong>Quantité</strong>
+               </th>
+               <th class="font-weight-bold">
+                 <strong>Total</strong>
+               </th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <th scope="row">
+                 <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" alt="" class="img-fluid z-depth-0">
+               </th>
+               <td>
+                 <h5 class="mt-3">
+                   <strong>iPhone</strong>
+                 </h5>
+                 <p class="text-muted">Apple</p>
+               </td>
+               <td>White</td>
+               <td></td>
+               <td>$800</td>
+               <td>
+                 <input type="number" value="2" aria-label="Search" class="form-control" style="width: 100px">
+               </td>
+               <td class="font-weight-bold">
+                 <strong>$800</strong>
+               </td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+     </section>
+   </div>
+   {% endif %}
+{% endblock %}

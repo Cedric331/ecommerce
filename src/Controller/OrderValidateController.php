@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Cart;
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,9 +18,9 @@ class OrderValidateController extends AbstractController
    }
    
     /**
-     * @Route("/commande/merci/{stripeSessionId}", name="order_validate")
+     * @Route("/commande/merci/{stripeSessionId}", name="order_success")
      */
-    public function index($stripeSessionId): Response
+    public function success($stripeSessionId, Cart $cart): Response
     {
       
        $order = $this->entity->getRepository(Order::class)->findOneBy(['stripeSessionId' => $stripeSessionId]);
@@ -30,12 +31,30 @@ class OrderValidateController extends AbstractController
 
        if($order->getIsPaid() == false)
        {
+         $cart->removeAll();
          $order->setIsPaid(true);
          $this->entity->flush();
 
          // envoi de mail
        }
         return $this->render('order_validate/success.html.twig',[
+           'order' => $order
+        ]);
+    }
+
+        /**
+     * @Route("/commande/erreur/{stripeSessionId}", name="order_cancel")
+     */
+    public function cancel($stripeSessionId): Response
+    {
+      
+       $order = $this->entity->getRepository(Order::class)->findOneBy(['stripeSessionId' => $stripeSessionId]);
+
+       if(!$order || $order->getUser() != $this->getUser()){
+          return $this->redirectToRoute('home');
+       }
+
+        return $this->render('order_validate/cancel.html.twig',[
            'order' => $order
         ]);
     }
