@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -42,6 +43,7 @@ class ProductCrudController extends AbstractCrudController
                      ->setUploadDir('public/uploads/products')
                      ->setUploadedFileNamePattern('[randomhash].[extension]'),
             TextEditorField::new('description'),
+            BooleanField::new('isBest', 'Best'),
             MoneyField::new('price', 'Prix')->setCurrency('EUR'),
             AssociationField::new('category', 'Catégorie')->setRequired(true)
         ];
