@@ -29,10 +29,10 @@ class OrderValidateController extends AbstractController
           return $this->redirectToRoute('home');
        }
 
-       if($order->getIsPaid() == false)
+       if($order->getState() == 0)
        {
          $cart->removeAll();
-         $order->setIsPaid(true);
+         $order->setState(1);
          $this->entity->flush();
 
          // envoi de mail

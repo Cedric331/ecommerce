@@ -12,6 +12,15 @@
               <div class="card-body">
                 <h4 class="mb-4 mt-1 h5 text-center font-weight-bold">Commande - {{ order.reference }}</h4>
                 <p class="text-center">Passé le : {{ order.createdAt|date('d/m/Y') }}</p>
+               <p class="text-center">
+                  {% if order.state == 1 %}
+                  Payé
+                  {% elseif order.state == 2 %}
+                  Préparation en cours
+                  {% elseif order.state == 3 %}
+                  Livraison en cours
+                  {% endif %}
+               </p>
                 <hr>
                   {% set total = 0 %}
                 <dl class="row">

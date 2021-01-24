@@ -73,7 +73,7 @@ class OrderController extends AbstractController
                 ->setCarrierName($form->get('transporteurs')->getData()->getName())
                 ->setCarrierPrice($form->get('transporteurs')->getData()->getPrice())
                 ->setDelivery($delivery_content)
-                ->setIsPaid(false);
+                ->setState(0);
          $this->entity->persist($order);
 
          foreach($cart->getFull() as $product)
