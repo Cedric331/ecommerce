@@ -6,13 +6,10 @@ use \Mailjet\Resources;
 
 class Mail
 {
-   private $api_key = "d2bead7f4b8962cad7a7ad3b21cfb79f";
-   private $api_secret = "1da6c85b74171822fec7a21dfb7511c5";
-
-   
    public function send($mail, $name, $subject)
    {
-      $mj = new Client($this->api_key, $this->api_secret,true,['version' => 'v3.1']);
+      $mj = new Client($_SERVER['APIKEY_PUBLIC'], $_SERVER['APIKEY_PRIVATE'],true,['version' => 'v3.1']);
+
       $body = [
           'Messages' => [
               [
@@ -32,7 +29,9 @@ class Mail
               ]
           ]
       ];
+
       $response = $mj->post(Resources::$Email, ['body' => $body]);
+      dd($response);
       $response->success() && dd($response->getData());
    }
 
