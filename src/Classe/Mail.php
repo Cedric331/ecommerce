@@ -14,7 +14,7 @@ class Mail
           'Messages' => [
               [
                   'From' => [
-                      'Email' => "pilot@mailjet.com",
+                      'Email' => "limacedric@hotmail.fr",
                       'Name' => "Test"
                   ],
                   'To' => [
@@ -31,7 +31,6 @@ class Mail
       ];
 
       $response = $mj->post(Resources::$Email, ['body' => $body]);
-      dd($response);
       $response->success() && dd($response->getData());
    }
 
